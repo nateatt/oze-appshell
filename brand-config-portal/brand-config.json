@@ -1,3 +1,70 @@
 {
-  "exampleKey": "exampleValue"
+  "_comment": "Brand configuration. ",
+  "brandName": "Oze",
+  "version": "1.0.0",
+  "colors": {
+    "_comment": "12 M3 seed roles. Values match OZE Figma design system (January 2026).",
+
+    "primary":         "#1246EA",
+    "secondary":       "#161A5C",
+    "tertiary":        "#F4D0EC",
+    "error":           "#C71313",
+
+    "background":      "#FFFFFF",
+    "surface":         "#FFFFFF",
+    "outline":         "#999999",
+
+    "success":         "#00B385",
+    "warning":         "#FFC01F",
+    "info":            "#1246EA",
+
+    "neutral":         "#000000",
+    "neutralVariant":  "#6267B7",
+
+    "dark": {
+      "_comment": "Optional overrides for dark theme. Omit any field to auto-derive from the light seed.",
+      "primary":    "#416BEE",
+      "secondary":  "#5C5F8D",
+      "tertiary":   "#BE59F0",
+      "error":      "#D85A5A",
+      "background": "#1A1A1A",
+      "surface":    "#1A1A1A",
+      "outline":    "#4D4D4D"
+    }
+  },
+
+  "typography": {
+    "_comment": "fontFamily must be a valid Google Fonts name or null to use the default Oze font. letterSpacingPercent is applied as: fontSize * (letterSpacingPercent / 100).",
+    "fontFamily": "DM Sans",
+    "letterSpacingPercent": -0.24,
+    "scale": {
+      "displayLarge":  { "size": 32, "lineHeight": 48 },
+      "displayMedium": { "size": 28, "lineHeight": 40 },
+      "h1":            { "size": 28, "lineHeight": 40 },
+      "h2":            { "size": 24, "lineHeight": 36 },
+      "h3":            { "size": 20, "lineHeight": 31 },
+      "h4":            { "size": 18, "lineHeight": 29 },
+      "bodyLarge":     { "size": 16, "lineHeight": 26 },
+      "body":          { "size": 14, "lineHeight": 22 },
+      "bodySmall":     { "size": 12, "lineHeight": 18 },
+      "caption":       { "size": 10, "lineHeight": 16 },
+      "button":        { "size": 14, "lineHeight": 20 },
+      "buttonLarge":   { "size": 16, "lineHeight": 24 },
+      "buttonSmall":   { "size": 12, "lineHeight": 16 },
+      "label":         { "size": 12, "lineHeight": 16 },
+      "inputTitle":    { "size": 12, "lineHeight": 16 },
+      "inputValue":    { "size": 14, "lineHeight": 20 },
+      "inputHelper":   { "size": 12, "lineHeight": 16 }
+    }
+  },
+
+  "shapes": {
+    "_comment": "Corner radius values in dp. Applied to RoundedCornerShape.",
+    "extraSmall": 4,
+    "small":      8,
+    "medium":     12,
+    "large":      16,
+    "extraLarge": 24
+  }
 }
+

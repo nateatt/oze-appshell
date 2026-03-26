@@ -239,18 +239,39 @@
 
     document.getElementById('resetBtn').onclick = setDefaults;
 
-    document.getElementById('saveBtn').onclick = function() {
+    document.getElementById('saveBtn').onclick = async function() {
       const json = JSON.stringify(getFormData(), null, 2);
-      const blob = new Blob([json], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'brand-config.json';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      document.getElementById('gistLink').innerHTML = '<span>brand-config.json has been saved (downloaded).</span>';
+      // Try to POST to backend
+      let posted = false;
+      try {
+        const resp = await fetch('/api/update-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: json
+        });
+        if (resp.ok) {
+          document.getElementById('gistLink').innerHTML = '<span style="color:green">brand-config.json updated on server.</span>';
+          posted = true;
+        } else {
+          const msg = await resp.text();
+          document.getElementById('gistLink').innerHTML = '<span style="color:orange">POST failed: ' + msg + '</span>';
+        }
+      } catch (e) {
+        document.getElementById('gistLink').innerHTML = '<span style="color:orange">POST error: ' + e + '</span>';
+      }
+      // Fallback: always offer download
+      if (!posted) {
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'brand-config.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        document.getElementById('gistLink').innerHTML += '<br><span>brand-config.json has been saved (downloaded).</span>';
+      }
     };
 
     // Set defaults on load
