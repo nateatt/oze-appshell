@@ -239,25 +239,18 @@
 
     document.getElementById('resetBtn').onclick = setDefaults;
 
-    document.getElementById('saveBtn').onclick = async function() {
+    document.getElementById('saveBtn').onclick = function() {
       const json = JSON.stringify(getFormData(), null, 2);
-      // Create Gist
-      const res = await fetch('https://api.github.com/gists', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          description: 'Oze Brand Config',
-          public: true,
-          files: { 'oze-brand-config.json': { content: json } }
-        })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        document.getElementById('gistLink').innerHTML =
-          `<a href="${data.files['oze-brand-config.json'].raw_url}" target="_blank">Download JSON from Gist</a>`;
-      } else {
-        document.getElementById('gistLink').textContent = 'Failed to create Gist.';
-      }
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'brand-config.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      document.getElementById('gistLink').innerHTML = '<span>brand-config.json has been saved (downloaded).</span>';
     };
 
     // Set defaults on load
