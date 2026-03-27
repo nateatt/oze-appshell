@@ -1,3 +1,5 @@
 {
-  "public": "brand-config-portal"
+  "public": true,
+  "buildCommand": "",
+  "outputDirectory": "brand-config-portal"
 }
