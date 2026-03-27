@@ -9,20 +9,38 @@ export default async function handler(req, res) {
     return;
   }
   try {
-    // Parse JSON body (Vercel Node.js API does not auto-parse)
-    let body = '';
-    await new Promise((resolve, reject) => {
-      req.on('data', chunk => { body += chunk; });
-      req.on('end', resolve);
-      req.on('error', reject);
-    });
-    const config = JSON.parse(body);
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      res.status(500).json({
+        error: 'BLOB_READ_WRITE_TOKEN is not configured for this deployment'
+      });
+      return;
+    }
+
+    // Vercel may provide parsed JSON body already; fallback to raw stream.
+    let config = req.body;
+    if (typeof config === 'string') {
+      config = JSON.parse(config);
+    } else if (!config || typeof config !== 'object') {
+      let body = '';
+      await new Promise((resolve, reject) => {
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', resolve);
+        req.on('error', reject);
+      });
+      config = JSON.parse(body);
+    }
+
+    if (!config || typeof config !== 'object') {
+      res.status(400).json({ error: 'Invalid JSON body' });
+      return;
+    }
+
     const blob = await put('brand-config.json', JSON.stringify(config, null, 2), {
       access: 'public',
       contentType: 'application/json',
       addRandomSuffix: false
     });
-    res.status(200).json({ url: blob.url });
+    res.status(200).json({ url: blob.url, pathname: blob.pathname });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
