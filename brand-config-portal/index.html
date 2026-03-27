@@ -4,118 +4,236 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand Config Portal</title>
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; margin: 2rem; background: #fafbfc; }
-    h1 { font-size: 1.5rem; }
-    fieldset { margin-bottom: 1.5rem; padding: 1rem; border: 1px solid #ccc; }
-    legend { font-weight: bold; }
-    label { display: block; margin-top: 0.5rem; }
-    input, select { margin-top: 0.2rem; margin-bottom: 0.5rem; width: 100%; max-width: 300px; }
-    .actions { margin-top: 2rem; }
-    .gist-link { margin-top: 1rem; }
-    .row { display: flex; gap: 1rem; }
-    .row > div { flex: 1; }
+    html, body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(120deg, #f4f7fa 0%, #e9eefa 100%);
+      margin: 0;
+      min-height: 100vh;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #1246EA;
+      margin-top: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 8px #e9eefa;
+    }
+    form {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px 0 rgba(18,70,234,0.07);
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 700px;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    fieldset {
+      margin-bottom: 1.5rem;
+      padding: 1.2rem 1rem 1rem 1rem;
+      border: 1.5px solid #e0e6f7;
+      border-radius: 12px;
+      background: #fafdff;
+      box-shadow: 0 1px 4px 0 rgba(18,70,234,0.03);
+    }
+    legend {
+      font-weight: 600;
+      color: #1246EA;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+      padding: 0 0.5rem;
+    }
+    label {
+      display: block;
+      margin-top: 0.7rem;
+      font-size: 1rem;
+      color: #222;
+      font-weight: 500;
+    }
+    input, select {
+      margin-top: 0.2rem;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      max-width: 320px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      border: 1px solid #dbe3f7;
+      border-radius: 6px;
+      padding: 0.45rem 0.7rem;
+      background: #f7fafd;
+      transition: border 0.2s;
+    }
+    input:focus, select:focus {
+      border: 1.5px solid #1246EA;
+      outline: none;
+      background: #fff;
+    }
+    input[type="color"] {
+      padding: 0.1rem;
+      height: 2.2rem;
+      width: 3.5rem;
+      min-width: 3.5rem;
+      border: none;
+      background: none;
+      box-shadow: 0 0 0 1.5px #dbe3f7;
+      border-radius: 6px;
+    }
+    .actions {
+      margin-top: 2.2rem;
+      display: flex;
+      gap: 1.2rem;
+      justify-content: flex-end;
+    }
+    .actions button {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: #1246EA;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.7rem 1.7rem;
+      box-shadow: 0 2px 8px 0 rgba(18,70,234,0.08);
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.18s;
+    }
+    .actions button:hover, .actions button:focus {
+      background: #0e36b6;
+      box-shadow: 0 4px 16px 0 rgba(18,70,234,0.13);
+    }
+    .gist-link {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #1246EA;
+      font-weight: 500;
+      word-break: break-all;
+    }
+    .row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .row > div {
+      flex: 1;
+      min-width: 220px;
+    }
+    @media (max-width: 700px) {
+      form { padding: 1.2rem 0.5rem; }
+      h1 { font-size: 1.3rem; }
+      .row { flex-direction: column; gap: 0.5rem; }
+    }
   </style>
 </head>
 <body>
   <h1>Brand Config Portal</h1>
-  <form id="brandForm">
-    <fieldset>
-      <legend>Brand Info</legend>
-      <label>Brand Name <input name="brandName" value="Oze" required></label>
-      <label>Version <input name="version" value="1.0.0" required></label>
-    </fieldset>
-
-    <fieldset>
-      <legend>Colors</legend>
-      <label>Primary <input name="primary" type="color" value="#1246EA"></label>
-      <label>Secondary <input name="secondary" type="color" value="#161A5C"></label>
-      <label>Tertiary <input name="tertiary" type="color" value="#F4D0EC"></label>
-      <label>Error <input name="error" type="color" value="#C71313"></label>
-      <label>Background <input name="background" type="color" value="#FFFFFF"></label>
-      <label>Surface <input name="surface" type="color" value="#FFFFFF"></label>
-      <label>Outline <input name="outline" type="color" value="#999999"></label>
-      <label>Success <input name="success" type="color" value="#00B385"></label>
-      <label>Warning <input name="warning" type="color" value="#FFC01F"></label>
-      <label>Info <input name="info" type="color" value="#1246EA"></label>
-      <label>Neutral <input name="neutral" type="color" value="#000000"></label>
-      <label>Neutral Variant <input name="neutralVariant" type="color" value="#6267B7"></label>
-      <fieldset>
-        <legend>Dark Theme Overrides</legend>
-        <label>Primary <input name="dark_primary" type="color" value="#416BEE"></label>
-        <label>Secondary <input name="dark_secondary" type="color" value="#5C5F8D"></label>
-        <label>Tertiary <input name="dark_tertiary" type="color" value="#BE59F0"></label>
-        <label>Error <input name="dark_error" type="color" value="#D85A5A"></label>
-        <label>Background <input name="dark_background" type="color" value="#1A1A1A"></label>
-        <label>Surface <input name="dark_surface" type="color" value="#1A1A1A"></label>
-        <label>Outline <input name="dark_outline" type="color" value="#4D4D4D"></label>
-      </fieldset>
-    </fieldset>
-
-    <fieldset>
-      <legend>Typography</legend>
-      <label>Font Family <input name="fontFamily" value="DM Sans"></label>
-      <label>Letter Spacing (%) <input name="letterSpacingPercent" type="number" step="0.01" value="-0.24"></label>
-      <fieldset>
-        <legend>Scale</legend>
-        <div class="row">
-          <div>
-            <label>displayLarge Size <input name="displayLarge_size" type="number" value="32"></label>
-            <label>displayLarge Line Height <input name="displayLarge_lineHeight" type="number" value="48"></label>
-            <label>displayMedium Size <input name="displayMedium_size" type="number" value="28"></label>
-            <label>displayMedium Line Height <input name="displayMedium_lineHeight" type="number" value="40"></label>
-            <label>h1 Size <input name="h1_size" type="number" value="28"></label>
-            <label>h1 Line Height <input name="h1_lineHeight" type="number" value="40"></label>
-            <label>h2 Size <input name="h2_size" type="number" value="24"></label>
-            <label>h2 Line Height <input name="h2_lineHeight" type="number" value="36"></label>
-            <label>h3 Size <input name="h3_size" type="number" value="20"></label>
-            <label>h3 Line Height <input name="h3_lineHeight" type="number" value="31"></label>
-            <label>h4 Size <input name="h4_size" type="number" value="18"></label>
-            <label>h4 Line Height <input name="h4_lineHeight" type="number" value="29"></label>
-          </div>
-          <div>
-            <label>bodyLarge Size <input name="bodyLarge_size" type="number" value="16"></label>
-            <label>bodyLarge Line Height <input name="bodyLarge_lineHeight" type="number" value="26"></label>
-            <label>body Size <input name="body_size" type="number" value="14"></label>
-            <label>body Line Height <input name="body_lineHeight" type="number" value="22"></label>
-            <label>bodySmall Size <input name="bodySmall_size" type="number" value="12"></label>
-            <label>bodySmall Line Height <input name="bodySmall_lineHeight" type="number" value="18"></label>
-            <label>caption Size <input name="caption_size" type="number" value="10"></label>
-            <label>caption Line Height <input name="caption_lineHeight" type="number" value="16"></label>
-            <label>button Size <input name="button_size" type="number" value="14"></label>
-            <label>button Line Height <input name="button_lineHeight" type="number" value="20"></label>
-            <label>buttonLarge Size <input name="buttonLarge_size" type="number" value="16"></label>
-            <label>buttonLarge Line Height <input name="buttonLarge_lineHeight" type="number" value="24"></label>
-            <label>buttonSmall Size <input name="buttonSmall_size" type="number" value="12"></label>
-            <label>buttonSmall Line Height <input name="buttonSmall_lineHeight" type="number" value="16"></label>
-            <label>label Size <input name="label_size" type="number" value="12"></label>
-            <label>label Line Height <input name="label_lineHeight" type="number" value="16"></label>
-            <label>inputTitle Size <input name="inputTitle_size" type="number" value="12"></label>
-            <label>inputTitle Line Height <input name="inputTitle_lineHeight" type="number" value="16"></label>
-            <label>inputValue Size <input name="inputValue_size" type="number" value="14"></label>
-            <label>inputValue Line Height <input name="inputValue_lineHeight" type="number" value="20"></label>
-            <label>inputHelper Size <input name="inputHelper_size" type="number" value="12"></label>
-            <label>inputHelper Line Height <input name="inputHelper_lineHeight" type="number" value="16"></label>
-          </div>
+    <form id="brandForm">
+      <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+        <div style="flex: 1 1 0; min-width: 260px; max-width: 340px; display: flex; flex-direction: column; gap: 1.5rem;">
+          <fieldset>
+            <legend>Brand Info</legend>
+            <label>Brand Name <input name="brandName" value="Oze" required></label>
+            <label>Version <input name="version" value="1.0.0" required></label>
+          </fieldset>
+          <fieldset>
+            <legend>Shapes</legend>
+            <label>Extra Small <input name="extraSmall" type="number" value="4"></label>
+            <label>Small <input name="small" type="number" value="8"></label>
+            <label>Medium <input name="medium" type="number" value="12"></label>
+            <label>Large <input name="large" type="number" value="16"></label>
+            <label>Extra Large <input name="extraLarge" type="number" value="24"></label>
+          </fieldset>
+          <fieldset>
+            <legend>Colors</legend>
+            <label>Primary <input name="primary" type="color" value="#1246EA"></label>
+            <label>Secondary <input name="secondary" type="color" value="#161A5C"></label>
+            <label>Tertiary <input name="tertiary" type="color" value="#F4D0EC"></label>
+            <label>Error <input name="error" type="color" value="#C71313"></label>
+            <label>Background <input name="background" type="color" value="#FFFFFF"></label>
+            <label>Surface <input name="surface" type="color" value="#FFFFFF"></label>
+            <label>Outline <input name="outline" type="color" value="#999999"></label>
+            <label>Success <input name="success" type="color" value="#00B385"></label>
+            <label>Warning <input name="warning" type="color" value="#FFC01F"></label>
+            <label>Info <input name="info" type="color" value="#1246EA"></label>
+            <label>Neutral <input name="neutral" type="color" value="#000000"></label>
+            <label>Neutral Variant <input name="neutralVariant" type="color" value="#6267B7"></label>
+            <fieldset>
+              <legend>Dark Theme Overrides</legend>
+              <label>Primary <input name="dark_primary" type="color" value="#416BEE"></label>
+              <label>Secondary <input name="dark_secondary" type="color" value="#5C5F8D"></label>
+              <label>Tertiary <input name="dark_tertiary" type="color" value="#BE59F0"></label>
+              <label>Error <input name="dark_error" type="color" value="#D85A5A"></label>
+              <label>Background <input name="dark_background" type="color" value="#1A1A1A"></label>
+              <label>Surface <input name="dark_surface" type="color" value="#1A1A1A"></label>
+              <label>Outline <input name="dark_outline" type="color" value="#4D4D4D"></label>
+            </fieldset>
+          </fieldset>
         </div>
-      </fieldset>
-    </fieldset>
-
-    <fieldset>
-      <legend>Shapes</legend>
-      <label>Extra Small <input name="extraSmall" type="number" value="4"></label>
-      <label>Small <input name="small" type="number" value="8"></label>
-      <label>Medium <input name="medium" type="number" value="12"></label>
-      <label>Large <input name="large" type="number" value="16"></label>
-      <label>Extra Large <input name="extraLarge" type="number" value="24"></label>
-    </fieldset>
-
-    <div class="actions">
-      <button type="button" id="saveBtn">Save</button>
-      <button type="button" id="resetBtn">Reset</button>
-    </div>
-    <div class="gist-link" id="gistLink"></div>
-  </form>
+        <div style="flex: 1 1 0; min-width: 260px; max-width: 340px;">
+          <fieldset>
+            <legend>Typography</legend>
+            <label>Font Family <input name="fontFamily" value="DM Sans"></label>
+            <label>Letter Spacing (%) <input name="letterSpacingPercent" type="number" step="0.01" value="-0.24"></label>
+            <fieldset>
+              <legend>Scale</legend>
+              <div class="row">
+                <div>
+                  <label>displayLarge Size <input name="displayLarge_size" type="number" value="32"></label>
+                  <label>displayLarge Line Height <input name="displayLarge_lineHeight" type="number" value="48"></label>
+                  <label>displayMedium Size <input name="displayMedium_size" type="number" value="28"></label>
+                  <label>displayMedium Line Height <input name="displayMedium_lineHeight" type="number" value="40"></label>
+                  <label>h1 Size <input name="h1_size" type="number" value="28"></label>
+                  <label>h1 Line Height <input name="h1_lineHeight" type="number" value="40"></label>
+                  <label>h2 Size <input name="h2_size" type="number" value="24"></label>
+                  <label>h2 Line Height <input name="h2_lineHeight" type="number" value="36"></label>
+                  <label>h3 Size <input name="h3_size" type="number" value="20"></label>
+                  <label>h3 Line Height <input name="h3_lineHeight" type="number" value="31"></label>
+                  <label>h4 Size <input name="h4_size" type="number" value="18"></label>
+                  <label>h4 Line Height <input name="h4_lineHeight" type="number" value="29"></label>
+                </div>
+                <div>
+                  <label>bodyLarge Size <input name="bodyLarge_size" type="number" value="16"></label>
+                  <label>bodyLarge Line Height <input name="bodyLarge_lineHeight" type="number" value="26"></label>
+                  <label>body Size <input name="body_size" type="number" value="14"></label>
+                  <label>body Line Height <input name="body_lineHeight" type="number" value="22"></label>
+                  <label>bodySmall Size <input name="bodySmall_size" type="number" value="12"></label>
+                  <label>bodySmall Line Height <input name="bodySmall_lineHeight" type="number" value="18"></label>
+                  <label>caption Size <input name="caption_size" type="number" value="10"></label>
+                  <label>caption Line Height <input name="caption_lineHeight" type="number" value="16"></label>
+                  <label>button Size <input name="button_size" type="number" value="14"></label>
+                  <label>button Line Height <input name="button_lineHeight" type="number" value="20"></label>
+                  <label>buttonLarge Size <input name="buttonLarge_size" type="number" value="16"></label>
+                  <label>buttonLarge Line Height <input name="buttonLarge_lineHeight" type="number" value="24"></label>
+                  <label>buttonSmall Size <input name="buttonSmall_size" type="number" value="12"></label>
+                  <label>buttonSmall Line Height <input name="buttonSmall_lineHeight" type="number" value="16"></label>
+                  <label>label Size <input name="label_size" type="number" value="12"></label>
+                  <label>label Line Height <input name="label_lineHeight" type="number" value="16"></label>
+                  <label>inputTitle Size <input name="inputTitle_size" type="number" value="12"></label>
+                  <label>inputTitle Line Height <input name="inputTitle_lineHeight" type="number" value="16"></label>
+                  <label>inputValue Size <input name="inputValue_size" type="number" value="14"></label>
+                  <label>inputValue Line Height <input name="inputValue_lineHeight" type="number" value="20"></label>
+                </div>
+              </div>
+            </fieldset>
+          </fieldset>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" id="saveBtn">Save</button>
+        <button type="button" id="resetBtn">Reset</button>
+      </div>
+      <div class="gist-link" id="gistLink"></div>
+    </form>
 
   <script>
     // Default values for reset
@@ -159,7 +277,6 @@
       label_size: 12, label_lineHeight: 16,
       inputTitle_size: 12, inputTitle_lineHeight: 16,
       inputValue_size: 14, inputValue_lineHeight: 20,
-      inputHelper_size: 12, inputHelper_lineHeight: 16,
       extraSmall: 4, small: 8, medium: 12, large: 16, extraLarge: 24
     };
 
@@ -215,7 +332,7 @@
             label:         { size: +f.label_size.value,         lineHeight: +f.label_lineHeight.value },
             inputTitle:    { size: +f.inputTitle_size.value,    lineHeight: +f.inputTitle_lineHeight.value },
             inputValue:    { size: +f.inputValue_size.value,    lineHeight: +f.inputValue_lineHeight.value },
-            inputHelper:   { size: +f.inputHelper_size.value,   lineHeight: +f.inputHelper_lineHeight.value }
+            // inputHelper removed
           }
         },
         shapes: {
