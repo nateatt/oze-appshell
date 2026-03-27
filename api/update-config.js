@@ -38,7 +38,8 @@ export default async function handler(req, res) {
     const blob = await put('brand-config.json', JSON.stringify(config, null, 2), {
       access: 'public',
       contentType: 'application/json',
-      addRandomSuffix: false
+      addRandomSuffix: false,
+      allowOverwrite: true
     });
     res.status(200).json({ url: blob.url, pathname: blob.pathname });
   } catch (err) {
